@@ -1,0 +1,18 @@
+node_modules
+.vscode
+.env
+
+#Vitest
+/coverage
+
+#Build
+/build
+
+#Database
+/data
+
+#HTTP TEST CLIENT
+client.http
+
+#JSON SERVER DB
+db.json

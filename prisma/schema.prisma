@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id           String    @id @default(uuid())
+  apiId        Int       @unique() @map("api_id")
+  name         String
+  firstName    String?   @map("first_name")
+  lastName     String?   @map("last_name")
+  age          Int?
+  birthDate    DateTime? @map("birth_date")
+  birthPlace   String?   @map("birth_place")
+  birthCountry String?   @map("birth_country")
+  nationality  String?
+  height       String?
+  weight       String?
+  injuried     Boolean?
+  photo        String?
+
+  statistics PlayerStatistics[]
+
+  events Events[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("players")
+}
+
+model PlayerStatistics {
+  id       String  @id @default(uuid())
+  teamId   Int?    @map("team_id")
+  teamName String? @map("team_name")
+  teamLogo String? @map("team_logo")
+
+  leagueId      Int?    @map("league_id")
+  leagueName    String? @map("league_name")
+  leagueCountry String? @map("league_country")
+  leagueLogo    String? @map("league_logo")
+  leagueFlag    String? @map("league_flag")
+  leagueSeason  Int?    @map("league_season")
+
+  goals    Int
+  assists  Int
+  score    Int
+  player   Player @relation(fields: [playerId], references: [id])
+  playerId String
+
+  @@map("player_statistics")
+}
+
+model Events {
+  id       String   @id @default(uuid())
+  name     String
+  date     DateTime
+  player   Player   @relation(fields: [playerId], references: [id])
+  playerId String   @map("player_id")
+}
+
+enum LogType {
+  SUCCESS
+  ERROR
+}
+
+model SyncLog {
+  id        String   @id @default(uuid())
+  page      Int
+  rows      Int
+  type      LogType
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
+enum ExportStatus {
+  RUNNING
+  SUCCESS
+  ERROR
+}
+
+model ExportLog {
+  id        String       @id @default(uuid())
+  rows      Int
+  type      ExportStatus
+  createdAt DateTime     @default(now()) @map("created_at")
+}
