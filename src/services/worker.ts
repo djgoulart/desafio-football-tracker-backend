@@ -3,7 +3,12 @@ import path from 'path'
 
 export function useWorkerForExport() {
   return new Promise((resolve, reject) => {
-    const workerPath = path.resolve(__dirname, 'export-worker.js')
+    const workerPath = path.resolve(
+      './',
+      __dirname,
+      'services',
+      'export-worker.js',
+    )
 
     const worker = new Worker(workerPath)
 
