@@ -36,6 +36,17 @@ Sincronização com API FOOTBALL
 - GET: /sync/stop
 - GET: /sync/status
 
+### Fluxo de sincronização
+A sincronização dos dados da aplicação com os dados da API Football ocorre sob demanda e pode ser iniciada/pausada por meio dos endpoints listados abaixo.
+
+Ao iniciado o processo de sincronização se estende por tempo indeterminado até que o mesmo seja manualmente interrompido ou até que todos os dados de jogadores na API Football (Season 2020) sejam armazenados no banco de dados desta aplicação.
+
+Durante a sincronização, são feitas 3 requests por minuto em um endpoint paginado, que devolve até 20 registros por vez. 
+
+Após cada requisição, os dados são armazenados no banco de dados, juntamente com um log que funciona como mecanismo de controle e ajuda a continuar processo caso o mesmo seja interrompido.
+
+<img src="https://github.com/djgoulart/desafio-football-tracker-backend/blob/17e5a49f0d3071313c8dc0023ac257347a679489/docs/sync.png" width="640" alt="processo de sincronização" />
+
 Exportação de dados
 - GET: /export
 
