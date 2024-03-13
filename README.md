@@ -45,7 +45,7 @@ Durante a sincronização, são feitas 3 requests por minuto em um endpoint pagi
 
 Após cada requisição, os dados são armazenados no banco de dados, juntamente com um log que funciona como mecanismo de controle e ajuda a continuar processo caso o mesmo seja interrompido.
 
-<img src="https://github.com/djgoulart/desafio-football-tracker-backend/blob/17e5a49f0d3071313c8dc0023ac257347a679489/docs/sync.png" width="640" alt="processo de sincronização" />
+<img src="https://github.com/djgoulart/desafio-football-tracker-backend/blob/17e5a49f0d3071313c8dc0023ac257347a679489/docs/sync.png" width="830" alt="processo de sincronização" />
 
 Exportação de dados
 - GET: /export
