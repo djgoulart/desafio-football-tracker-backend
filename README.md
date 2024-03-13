@@ -40,7 +40,10 @@ A sincronização dos dados da aplicação com os dados da API Football ocorre s
 Ao iniciado o processo de sincronização se estende por tempo indeterminado até que o mesmo seja manualmente interrompido ou até que todos os dados de jogadores na API Football (Season 2020) sejam armazenados no banco de dados desta aplicação.
 
 Durante a sincronização, são feitas ``3 requests por minuto`` em um endpoint paginado, que devolve até ``20 registros`` por vez. 
-
+<br /><br />
+<img src="https://github.com/djgoulart/desafio-football-tracker-backend/blob/0ae62194db3a1eace30b43e29ad52a0b03bcbe06/docs/sync-logs.png" width="830" alt="logs de sincronização" />
+<br />
+<br />
 Após cada requisição, os dados são armazenados no banco de dados, juntamente com um log que funciona como mecanismo de controle e ajuda a continuar processo caso o mesmo seja interrompido.
 
 <img src="https://github.com/djgoulart/desafio-football-tracker-backend/blob/17e5a49f0d3071313c8dc0023ac257347a679489/docs/sync.png" width="830" alt="processo de sincronização" />
