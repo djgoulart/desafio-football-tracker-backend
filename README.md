@@ -1,24 +1,28 @@
 
-# Hygea FullStack Challenge - Backend
+# Desafio Football Tracker - Backend
 
-O desafio consiste em desenvolver um CRUD para uma entidade já existente chamada 'USER'. Além disso, é necessário criar um front-end que consuma a API, apresentando as funcionalidades de CRUD para essa entidade de USER. Na função de LIST, defina e implemente alguns filtros.
+O desafio consiste em desenvolver uma aplicação para gerenciar um programa de recompensas gamificado para um determinado público alvo. Nesse caso, os jogadores de futebol listados em uma API: [API-FOOTBALL](https://dashboard.api-football.com/). 
 
-Um ponto EXTRA será a inclusão de uma funcionalidade de busca com autocompletar na lista de usuários.
+### Cada Jogador recebe pontos com base em alguns critérios.
+- 1 ponto por cada ``GOL`` realizado na temporada (2020)
+- 1 ponto por cada ``assistência`` realizada na temporada (2020)
+- 5 pontos por cada participação em ``eventos presenciais``.
+
+Os eventos presenciais serão registrados na aplicação que será construída.
+
+### Os jogadores ganharão "níveis" com base em usa pontuação.
+- Jogadores com menos ``15`` pontos são ``bronze``.
+- Jogadores com pontuação ``entre 15 e 29`` são ``prata``.
+- Jogadores com ``30 pontos ou mais`` são ``ouro``
 
 ## Entregáveis do Desafio
-- [Aplicativo Mobile](https://github.com/djgoulart/hygea-challenge-app)
-- [Aplicação Backend](https://github.com/djgoulart/test-hygea-backend)
-  
-#### Implementar os endpoints listados abaixo:
-- GET - user/list
-- GET - user/:id
-- POST - user/create
-- DELETE - user/delete/:id
-- PUT - user/:id/edit
+- [Frontend ](https://github.com/djgoulart/desafio-football-tracker-frontend): Aplicação para gerenciar as informações
+- [Backend](https://github.com/djgoulart/desafio-football-tracker-backend): Uma api construída para cuidar da sincronização e exportação dos dados
+- [AppSheet](https://www.appsheet.com/template/mobilepreview?appId=31b60ea4-be47-47da-bcff-f0baa15af8ff) Um aplicativo low code para demonstração das informações
+- [Google Sheet](https://docs.google.com/spreadsheets/d/1RgNmoyI4uJPZILHdnt6buvAPiqtVAOciJe1W7oMcSCM/edit?usp=sharing) Uma planilha do google para onde os dados são exportados.
 
 ## Solução do desafio
-
-Para a solução deste desafio foi adotada uma arquitetura simples em termos de organização, mas ao mesmo tempo robusta o suficiente para garantir a qualidade e longevidade do código implementado. Foram utilizados alguns conceitos de SOLID e Clean Architecture, além de testes unitários e e2e para garantir confiabilidade das entregas.
+Para a solução deste desafio foi adotada uma arquitetura simples em termos de organização, mas ao mesmo tempo robusta o suficiente para garantir a qualidade e longevidade do código implementado. 
 
 ## Stack Utilizada
 - NodeJS
@@ -26,28 +30,30 @@ Para a solução deste desafio foi adotada uma arquitetura simples em termos de 
 - Prisma
 - PostgreSQL
 
+### Endpoints
+Sincronização com API FOOTBALL
+- GET: /sync/start
+- GET: /sync/stop
+- GET: /sync/status
+
+Exportação de dados
+- GET: /export
+
 ## Requisitos de sistema
 
 * NodeJS 18+
-* Docker (para uso em ambiente local)
+* Docker + Docker Compose (para uso em ambiente local)
 
 ## Ambiente de produção
 
-A aplicação do backend está disponível de forma pública em: ```https://hygea-challenge-backend.onrender.com```
+A aplicação do backend está disponível de forma pública em: [https://football-tracker-backend.onrender.com](https://football-tracker-backend.onrender.com)
 
 ## Rodando o localmente
-- instale as dependêndias do projeto
-- crie um arquivo ``.env`` na raiz do projeto utilizando como modelo o arquivo ``.env.example`` que está localizado na pasta raiz do projeto. Todas as variáveis são obrigatórias.
+- instale as dependências do projeto: ```npm install```
+- crie um arquivo ```.env``` na raiz do projeto utilizando como modelo o arquivo ```.env.example``` como modelo. Todas as variáveis são obrigatórias.
 - inicialize uma instância do banco de dados com o comando: ``docker compose up -d``
 - gere os arquivos do Prisma: ``` npx prisma generate ```
-- rode as migrations do projeto: ``` npx prisma migrate dev ```
+- rode as migrations do projeto: ```npx prisma migrate dev ```
 - utilize o comando: ``npm run start:dev`` para inicializar a aplicação em modo desenvolvimento ou
 - utilize o comando ``npm run build`` e em seguida ``npm start``para inicializar em modo de produção 
 
-## Rodando Testes Unitários
-Utilize o comando ``npm run test`` para rodar os testes unitários
-
-## Rodando Testes E2E
-Utilize o comando ``npm run test:e2e`` para rodar os testes e2e
-
-Obs.: Os testes e2e rodam em um ambiente separado com banco temporário, veja a configuração dentro da pasta ```prisma/vitest-environment-prisma```
